@@ -67,6 +67,14 @@ h3 {
     margin: 0 0 0.5em 0;
 }
 
+#user-input {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
 #calc-container {
     padding: 1em;
     margin: 0 auto;
@@ -74,23 +82,34 @@ h3 {
 }
 
 #weapon-data {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
     width: 350px;
-    height: 100%;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 
 #user-input-left {
-    display: table-cell;
     width: 365px;
-    height: 100%;
-}
-
-#user-input-right {
-    display: table-cell;
-    vertical-align: top;
+    display: flex;
+    margin-right: 2em;
 }
 
 #user-input-right p { margin: 0.3em 0 0 0; }
 #crafting-presets p { margin: 0.1em 0 0 0; }
+#crafting-presets a, #crafting-presets a:visited {
+    color: #ccc;
+    text-decoration: none;
+}
+#crafting-presets a:hover { text-decoration: underline; }
+#crafting-presets .active a, #crafting-presets .active a:visited { color: #cb4b16; }
+
+#crafting-presets a { pointer-events: none; }
+#crafting-presets .active a { pointer-events: auto; }
+
+#crafting-presets p { color: #ccc; }
+#crafting-presets p.active { color: inherit; }
 
 #output {
     display: inline-block;

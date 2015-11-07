@@ -33,7 +33,7 @@ var update_dps = function() {
     
     // Extract base weapon.
     if (data == "") {
-        $("#crafting-presets button").attr("disabled", true);
+        $("#crafting-presets p").removeClass("active");
         return;
     }
     var data_lines = data.split("\n");
@@ -51,15 +51,15 @@ var update_dps = function() {
     
     if (base_name === null) {
         $("#output").text("Unknown weapon base type or invalid data.");
-        $("#crafting-presets button").attr("disabled", true);
+        $("#crafting-presets p").removeClass("active");
         return;
     }
     var base_stats = weapon_base_data[base_name];
     
     cur_master_category = master_categories[base_stats[0]];
-    $("#crafting-presets button").removeAttr("disabled");
+    $("#crafting-presets p").addClass("active");
     if (cur_master_category == "bow" || cur_master_category == "wand") {
-        $("#master-craft-inc-as2 button").attr("disabled", true);
+        $("#master-craft-inc-as2").removeClass("active");
     }
     
     // Global phys damage implicit screws up calculation below, remove it.
@@ -160,9 +160,10 @@ var update_form_val = function(scale, basetype) {
     el.val(val.toString());
 };
 
-$("#crafting-presets button").click(function(e) {
+$("#crafting-presets a").click(function(e) {
+    e.preventDefault();
     var btn = $(e.target);
-    var scale = btn.text();
+    var scale = btn.text().toLowerCase();
     var type = btn.parent().attr("id");
     var basetype = type.replace("master-craft-", "");
     if (basetype.indexOf("add-", 0) > -1) {

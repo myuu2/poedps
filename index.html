@@ -1,0 +1,99 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Weapon DPS Calculator</title>
+<meta name="description" content="A Path of Exile weapon DPS calculator with optional crafting.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/normalize.min.css">
+<link rel="stylesheet" href="css/main.css">
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+<![endif]-->
+</head>
+<body>
+<div id="calc-container">
+    <h1>Path of Exile weapon DPS calculator with crafting options</h1>
+    <form id="user-input">
+        <section id="user-input-left">
+            <textarea id="weapon-data">This text will automatically disappear
+when you click on this textarea.
+
+Usage:
+Press Ctrl+C while hovering over an item
+in-game and paste in this textarea. You
+don't have to submit the form, everything
+dynamically updates.
+
+The stats, physical DPS, elemental DPS
+and total DPS will be shown on the
+bottom after pasting.
+
+After pasting you can also 'craft' your
+weapon by entering values on the right.
+The stats below will reflect the stats
+you would have in-game.
+                
+You can also use presets by clicking the
+buttons on the right after pasting. The
+buttons min, avg and max respectively
+mean minimum roll, average roll and
+maximum roll.
+
+It is your responsibility to figure out
+whether or not your affixes fit on the
+item. This tool makes no attempt to
+check (duplicate) affixes at all.
+            
+Finally, I only thoroughly tested this
+with rare items. Some uniques might have
+weird text that breaks the tool.</textarea>
+        </section>
+        <section id="user-input-right">
+            <h3>Added crafting:</h3>
+            <p><label><input id="craft-quality" type="checkbox" checked> 20% Quality</label></p>
+            <p><input id="craft-inc-phys" type="number" value="0" style="width: 3em;">% increased Physical Damage</p>
+            <p>Adds <input id="craft-min-add-phys" type="number" value="0" style="width: 2.5em;"> - <input id="craft-max-add-phys" type="number" style="width: 2.5em;" value="0"> Physical Damage</p>
+            <p>Adds <input id="craft-min-add-fire" type="number" value="0" style="width: 2.5em;"> - <input id="craft-max-add-fire" type="number" style="width: 2.5em;" value="0"> Fire Damage</p>
+            <p>Adds <input id="craft-min-add-cold" type="number" value="0" style="width: 2.5em;"> - <input id="craft-max-add-cold" type="number" style="width: 2.5em;" value="0"> Cold Damage</p>
+            <p>Adds <input id="craft-min-add-lightning" type="number" value="0" style="width: 2.5em;"> - <input id="craft-max-add-lightning" type="number" style="width: 2.5em;" value="0"> Lightning Damage</p>
+            <p><input id="craft-inc-as" type="number" value="0" style="width: 2.5em;">% increased Attack Speed</p>
+            <p><input id="craft-inc-crit" type="number" value="0" style="width: 2.5em;">% increased Critical Strike Chance</p>
+            <br>
+            <h3>Master Crafting presets:</h3>
+            <section id="crafting-presets">
+                <p id="master-craft-inc-phys"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> % increased Physical, 6 alt</p>
+                <p id="master-craft-inc-phys2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> % increased Physical, 2 chaos</p>
+                <p id="master-craft-add-phys"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Physical, 6 alt</p>
+                <p id="master-craft-add-phys2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Physical, 2 chaos</p>
+                <p id="master-craft-add-fire"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Fire, 5 alt</p>
+                <p id="master-craft-add-fire2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Fire, 3 chaos</p>
+                <p id="master-craft-add-cold"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Cold, 5 alt</p>
+                <p id="master-craft-add-cold2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Cold, 3 chaos</p>
+                <p id="master-craft-add-lightning"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Lightning, 5 alt</p>
+                <p id="master-craft-add-lightning2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> Added Lightning, 3 chaos</p>
+                <p id="master-craft-inc-as"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> % increased Attack Speed, 2 chaos</p>
+                <p id="master-craft-inc-as2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> % increased Attack Speed, 4 chaos</p>
+                <p id="master-craft-inc-crit"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> % increased Critical Strike Chance, 1 alch</p>
+                <p id="master-craft-inc-crit2"><button type="button" disabled>min</button> <button type="button" disabled>avg</button> <button type="button" disabled>max</button> % increased Critical Strike Chance, 4 alchs</p>
+            </section>
+            
+            <p style="margin-top: 1em;"><button id="craft-reset" type="button">Reset</button></p>
+        </section>
+    </form>
+
+    <div id="output-wrapper">
+        <pre id="output" style="margin-top: 1em;"></pre>
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
